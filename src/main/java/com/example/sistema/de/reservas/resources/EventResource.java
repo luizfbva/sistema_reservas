@@ -47,9 +47,10 @@ public class EventResource {
         EventDTO obj = service.insert(dto);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest().path("/{id}")
-                .buildAndExpand(obj.getEventId()).toUri();
+                .buildAndExpand(obj.getEventId())
+                .toUri();
 
-        return ResponseEntity.created(uri).body(dto);
+        return ResponseEntity.created(uri).body(obj);
     }
 
     @DeleteMapping(value = "/{id}")

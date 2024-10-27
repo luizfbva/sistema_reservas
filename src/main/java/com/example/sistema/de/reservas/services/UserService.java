@@ -36,9 +36,9 @@ public class UserService {
     }
 
     public UserDTO insert(UserDTO userDTO) {
-        User user = userMapper.toEntity(userDTO);
+        User user = new User (userDTO);
         user = repository.save(user);
-        return userMapper.toDTO(user);
+        return new UserDTO(user);
     }
 
     public void delete(Long id) {

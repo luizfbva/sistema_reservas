@@ -11,38 +11,32 @@ import jakarta.validation.constraints.Size;
 public class EventDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    
     private Long eventId;
-
-    @NotNull(message = "Event date cannot be null")
-    @Future(message = "Event date must be in the future")
     private Instant eventDate;
-
-    @NotBlank(message = "Event name cannot be empty")
     private String eventName;
-
-    @NotBlank(message = "Event description cannot be empty")
-    @Size(max = 500, message = "Event description must be at most 500 characters long")
     private String eventDescription;
 
     public EventDTO() {
     }
 
-    public EventDTO(Long eventId, Instant eventDate, String eventName, String eventDescription) {
-        this.eventId = eventId;
+    public EventDTO(Instant eventDate, String eventName, String eventDescription, Long eventId) {
         this.eventDate = eventDate;
         this.eventName = eventName;
         this.eventDescription = eventDescription;
-    }
-
-    public Long getEventId() {
-        return eventId;
-    }
-
-    public void setEventId(Long eventId) {
         this.eventId = eventId;
     }
 
-    public Instant getEventDate() {
+    
+    public Long getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(Long eventId) {
+		this.eventId = eventId;
+	}
+
+	public Instant getEventDate() {
         return eventDate;
     }
 

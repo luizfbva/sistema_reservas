@@ -12,8 +12,6 @@ import com.example.sistema.de.reservas.repositories.ReservationRepository;
 import com.example.sistema.de.reservas.services.exceptions.DatabaseException;
 import com.example.sistema.de.reservas.services.exceptions.ResourceNotFoundException;
 
-import jakarta.persistence.EntityNotFoundException;
-
 @Service
 public class ReservationService {
 
@@ -38,7 +36,8 @@ public class ReservationService {
 
 	public void deleteReservation(Long id) {
 		try {
-			findReservationById(id);
+			Reservation reservationById = findReservationById(id);
+			eventService.returnTicketsFromDeleteReservation(reservationById.getEvent(), reservationById.getTicketsAmount());
 			reservationRepository.deleteById(id);
 		} catch (ResourceNotFoundException e) {
 			throw new ResourceNotFoundException(id);
@@ -47,20 +46,9 @@ public class ReservationService {
 		}
 
 	}
-
-	public Reservation updateReservation(Long id, Reservation changedReservation) {
-		try {
-			Reservation oldReservation = reservationRepository.getReferenceById(id);
-			updateDataFromReservation(oldReservation, changedReservation);
-			return reservationRepository.save(oldReservation);
-		} catch (EntityNotFoundException e) {
-			throw new ResourceNotFoundException(id);
-		}
+	
+	public List<Reservation> findAllByUserId(Long userId) {
+		return reservationRepository.findAllByUserId(userId);
 	}
 
-	private void updateDataFromReservation(Reservation oldReservation, Reservation changedReservation) {
-		oldReservation.setTicketsAmount(changedReservation.getTicketsAmount());
-		oldReservation.setUser(changedReservation.getUser());
-		eventService.updateAvailableTickets(oldReservation.getEvent().getEventId());
-	}
 }

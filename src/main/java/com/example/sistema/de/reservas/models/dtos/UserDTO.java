@@ -1,33 +1,32 @@
 package com.example.sistema.de.reservas.models.dtos;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import org.springframework.beans.BeanUtils;
+
+import com.example.sistema.de.reservas.models.entities.User;
+
+import ch.qos.logback.core.joran.util.beans.BeanUtil;
 
 public class UserDTO {
 
 	private Long userId;
-
-	@NotBlank(message = "Name is required")
-	@Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
 	private String userName;
-
-	@NotBlank(message = "Email is required")
-	@Email(message = "Email should be valid")
 	private String userEmail;
-	
-	@NotBlank(message = "Phone is required")
 	private String userPhone;
 
 	public UserDTO() {
 
 	}
 
-	public UserDTO(String userName, String userEmail, String userPhone, Long userId) {
-		this.userName = userName;
-		this.userEmail = userEmail;
-		this.userPhone = userPhone;
+	public UserDTO(User user) {
+		BeanUtils.copyProperties(user, this);
+	}
+
+	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public Long getUserId() {
+		return userId;
 	}
 
 	public String getUserName() {
@@ -52,14 +51,6 @@ public class UserDTO {
 
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
-	}
-
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
 	}
 
 }

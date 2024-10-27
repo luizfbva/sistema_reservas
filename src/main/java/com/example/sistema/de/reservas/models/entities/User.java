@@ -3,7 +3,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import org.springframework.beans.BeanUtils;
+
+import com.example.sistema.de.reservas.models.dtos.UserDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +34,10 @@ public class User implements Serializable {
 
 	public User() {
 
+	}
+	
+	public User(UserDTO userDTO) {
+		BeanUtils.copyProperties(userDTO, this);
 	}
 
 	public User(Long id, String userName, String userEmail, String userPhone) {

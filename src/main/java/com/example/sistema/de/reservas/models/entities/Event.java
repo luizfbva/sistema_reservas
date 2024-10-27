@@ -103,6 +103,10 @@ public class Event implements Serializable {
 	public Integer getEventAvailableTickets() {
 		return eventAvailableTickets;
 	}
+	
+	public void addAvailableTickets(Integer ticketsAmount) {
+		this.eventAvailableTickets += ticketsAmount;
+	}
 
 	@Override
 	public int hashCode() {

@@ -44,11 +44,13 @@ public class TestConfig implements CommandLineRunner {
 		eventRepository.saveAll(Arrays.asList(event1, event2));
 
 		Reservation reservation1 = new Reservation(1L, 1, user1, event1);
+		Reservation reservation3 = new Reservation(3L, 2, user1, event2);
 		Reservation reservation2 = new Reservation(2L, 2, user2, event2);
 
-		reservationRepository.saveAll(Arrays.asList(reservation1, reservation2));
+		reservationRepository.saveAll(Arrays.asList(reservation1, reservation2, reservation3));
 		
 		event1.getReservations().add(reservation1);
+		event2.getReservations().add(reservation3);
 		event2.getReservations().add(reservation2);
 
 		eventRepository.saveAll(Arrays.asList(event1, event2));

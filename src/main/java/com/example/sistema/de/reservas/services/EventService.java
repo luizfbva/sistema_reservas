@@ -80,4 +80,10 @@ public class EventService {
 		event.setEventAvailableTickets(event.getEventTotalTickets() - sum);
 		repository.save(event);
 	}
+
+	public void returnTicketsFromDeleteReservation(Event event, Integer ticketsAmount) {
+		event.addAvailableTickets(ticketsAmount);
+		repository.save(event);
+
+	}
 }

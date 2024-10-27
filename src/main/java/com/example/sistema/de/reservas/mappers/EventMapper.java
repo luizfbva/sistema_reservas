@@ -12,8 +12,11 @@ public class EventMapper {
 		if (event == null) {
 			return null;
 		}
-		return new EventDTO(event.getEventId(), event.getEventDate(), event.getEventName(),
-				event.getEventDescription());
+		return new EventDTO(
+				event.getEventDate(), 
+				event.getEventName(),
+				event.getEventDescription(),
+				event.getEventId());
 	}
 
 	public Event toEntity(EventDTO dto) {
@@ -21,7 +24,6 @@ public class EventMapper {
 			return null;
 		}
 		Event entity = new Event();
-		dto.getEventId();
 		dto.getEventDate();
 		dto.getEventName();
 		dto.getEventDescription();
